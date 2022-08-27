@@ -13,56 +13,73 @@ import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MESSAGE_TYPE } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 /**
- * Size of a Hat, in inches.
+ * Details and the code itself
  *
- * @generated from protobuf message Size
+ * @generated from protobuf message RunCodeRequest
  */
-export interface Size {
+export interface RunCodeRequest {
     /**
-     * @generated from protobuf field: int32 inches = 1;
+     * @generated from protobuf field: Languages language = 1;
      */
-    inches: number; // must be > 0
+    language: Languages;
+    /**
+     * @generated from protobuf field: string code = 2;
+     */
+    code: string;
 }
 /**
- * A Hat is a piece of headwear made by a Haberdasher.
+ * Result of code execution
  *
- * @generated from protobuf message Hat
+ * @generated from protobuf message RunCodeResponse
  */
-export interface Hat {
+export interface RunCodeResponse {
     /**
-     * @generated from protobuf field: int32 inches = 1;
+     * @generated from protobuf field: string result = 1;
      */
-    inches: number;
+    result: string;
+}
+/**
+ * @generated from protobuf enum Languages
+ */
+export enum Languages {
     /**
-     * @generated from protobuf field: string color = 2;
+     * @generated from protobuf enum value: JAVASCRIPT = 0;
      */
-    color: string; // anything but "invisible"
+    JAVASCRIPT = 0,
     /**
-     * @generated from protobuf field: string name = 3;
+     * @generated from protobuf enum value: TYPESCRIPT = 1;
      */
-    name: string; // i.e. "bowler"
+    TYPESCRIPT = 1,
+    /**
+     * @generated from protobuf enum value: GOLANG = 2;
+     */
+    GOLANG = 2
 }
 // @generated message type with reflection information, may provide speed optimized methods
-class Size$Type extends MessageType<Size> {
+class RunCodeRequest$Type extends MessageType<RunCodeRequest> {
     constructor() {
-        super("Size", [
-            { no: 1, name: "inches", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+        super("RunCodeRequest", [
+            { no: 1, name: "language", kind: "enum", T: () => ["Languages", Languages] },
+            { no: 2, name: "code", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
-    create(value?: PartialMessage<Size>): Size {
-        const message = { inches: 0 };
+    create(value?: PartialMessage<RunCodeRequest>): RunCodeRequest {
+        const message = { language: 0, code: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
-            reflectionMergePartial<Size>(this, message, value);
+            reflectionMergePartial<RunCodeRequest>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Size): Size {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: RunCodeRequest): RunCodeRequest {
         let message = target ?? this.create(), end = reader.pos + length;
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* int32 inches */ 1:
-                    message.inches = reader.int32();
+                case /* Languages language */ 1:
+                    message.language = reader.int32();
+                    break;
+                case /* string code */ 2:
+                    message.code = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -75,10 +92,13 @@ class Size$Type extends MessageType<Size> {
         }
         return message;
     }
-    internalBinaryWrite(message: Size, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* int32 inches = 1; */
-        if (message.inches !== 0)
-            writer.tag(1, WireType.Varint).int32(message.inches);
+    internalBinaryWrite(message: RunCodeRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* Languages language = 1; */
+        if (message.language !== 0)
+            writer.tag(1, WireType.Varint).int32(message.language);
+        /* string code = 2; */
+        if (message.code !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.code);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -86,38 +106,30 @@ class Size$Type extends MessageType<Size> {
     }
 }
 /**
- * @generated MessageType for protobuf message Size
+ * @generated MessageType for protobuf message RunCodeRequest
  */
-export const Size = new Size$Type();
+export const RunCodeRequest = new RunCodeRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class Hat$Type extends MessageType<Hat> {
+class RunCodeResponse$Type extends MessageType<RunCodeResponse> {
     constructor() {
-        super("Hat", [
-            { no: 1, name: "inches", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
-            { no: 2, name: "color", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        super("RunCodeResponse", [
+            { no: 1, name: "result", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
-    create(value?: PartialMessage<Hat>): Hat {
-        const message = { inches: 0, color: "", name: "" };
+    create(value?: PartialMessage<RunCodeResponse>): RunCodeResponse {
+        const message = { result: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
-            reflectionMergePartial<Hat>(this, message, value);
+            reflectionMergePartial<RunCodeResponse>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Hat): Hat {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: RunCodeResponse): RunCodeResponse {
         let message = target ?? this.create(), end = reader.pos + length;
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* int32 inches */ 1:
-                    message.inches = reader.int32();
-                    break;
-                case /* string color */ 2:
-                    message.color = reader.string();
-                    break;
-                case /* string name */ 3:
-                    message.name = reader.string();
+                case /* string result */ 1:
+                    message.result = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -130,16 +142,10 @@ class Hat$Type extends MessageType<Hat> {
         }
         return message;
     }
-    internalBinaryWrite(message: Hat, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* int32 inches = 1; */
-        if (message.inches !== 0)
-            writer.tag(1, WireType.Varint).int32(message.inches);
-        /* string color = 2; */
-        if (message.color !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.color);
-        /* string name = 3; */
-        if (message.name !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.name);
+    internalBinaryWrite(message: RunCodeResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string result = 1; */
+        if (message.result !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.result);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -147,12 +153,12 @@ class Hat$Type extends MessageType<Hat> {
     }
 }
 /**
- * @generated MessageType for protobuf message Hat
+ * @generated MessageType for protobuf message RunCodeResponse
  */
-export const Hat = new Hat$Type();
+export const RunCodeResponse = new RunCodeResponse$Type();
 /**
- * @generated ServiceType for protobuf service Haberdasher
+ * @generated ServiceType for protobuf service Sandbox
  */
-export const Haberdasher = new ServiceType("Haberdasher", [
-    { name: "MakeHat", options: {}, I: Size, O: Hat }
+export const Sandbox = new ServiceType("Sandbox", [
+    { name: "RunCode", options: {}, I: RunCodeRequest, O: RunCodeResponse }
 ]);

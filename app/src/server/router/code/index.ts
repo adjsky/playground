@@ -2,27 +2,22 @@ import { z } from "zod"
 import { TwirpFetchTransport } from "@protobuf-ts/twirp-transport"
 
 import { createRouter } from "../context"
-import supportedLanguages from "@/data/supported-languages"
-import { HaberdasherClient } from "@/protos/sandbox.client"
+import { SandboxClient } from "@/protos/sandbox.client"
+import { Languages } from "@/protos/sandbox"
 
 const transport = new TwirpFetchTransport({
   baseUrl: "http://localhost:8080/twirp"
 })
-const client = new HaberdasherClient(transport)
+const client = new SandboxClient(transport)
 
 export const codeRouter = createRouter().mutation("run", {
   input: z.object({
-    lang: z.enum(supportedLanguages),
+    language: z.nativeEnum(Languages),
     code: z.string()
   }),
-  async resolve({ input: { lang, code } }) {
-    try {
-      const data = await client.makeHat({ inches: 4 })
-      console.log(data.response)
-    } catch (e) {
-      console.log(e)
-    }
+  async resolve({ input: { language, code } }) {
+    const rpcCall = await client.runCode({ code, language })
 
-    return ""
+    return rpcCall.response.result
   }
 })

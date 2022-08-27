@@ -2,20 +2,23 @@ syntax = "proto3";
 
 option go_package = "rpc/sandbox";
 
-// Haberdasher service makes hats for clients.
-service Haberdasher {
+// Sandbox service runs the provided code and returns the result
+service Sandbox {
   // MakeHat produces a hat of mysterious, randomly-selected color!
-  rpc MakeHat(Size) returns (Hat);
+  rpc RunCode(RunCodeRequest) returns (RunCodeResponse);
 }
 
-// Size of a Hat, in inches.
-message Size {
-  int32 inches = 1; // must be > 0
+enum Languages {
+  JAVASCRIPT = 0;
+  TYPESCRIPT = 1;
+  GOLANG = 2;
 }
 
-// A Hat is a piece of headwear made by a Haberdasher.
-message Hat {
-  int32 inches = 1;
-  string color = 2; // anything but "invisible"
-  string name = 3; // i.e. "bowler"
+// Details and the code itself
+message RunCodeRequest {
+  Languages language = 1;
+  string code = 2;
 }
+
+// Result of code execution
+message RunCodeResponse { string result = 1; }

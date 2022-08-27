@@ -2,6 +2,7 @@ import { useState } from "react"
 import Editor from "@monaco-editor/react"
 
 import { trpc } from "@/utils/trpc"
+import { Languages } from "@/protos/sandbox"
 
 import type { NextPage } from "next"
 
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
         <button
           className="rounded-lg bg-indigo-800 py-2 px-4 text-yellow-100"
           onClick={() => {
-            codeRunMutation.mutate({ lang: "typescript", code })
+            codeRunMutation.mutate({ language: Languages.JAVASCRIPT, code })
           }}
           disabled={codeRunMutation.isLoading || code == ""}
         >

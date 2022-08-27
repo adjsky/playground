@@ -3,43 +3,43 @@
 // tslint:disable
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
-import { Haberdasher } from "./sandbox";
+import { Sandbox } from "./sandbox";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import type { Hat } from "./sandbox";
-import type { Size } from "./sandbox";
+import type { RunCodeResponse } from "./sandbox";
+import type { RunCodeRequest } from "./sandbox";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
- * Haberdasher service makes hats for clients.
+ * Sandbox service runs the provided code and returns the result
  *
- * @generated from protobuf service Haberdasher
+ * @generated from protobuf service Sandbox
  */
-export interface IHaberdasherClient {
+export interface ISandboxClient {
     /**
      * MakeHat produces a hat of mysterious, randomly-selected color!
      *
-     * @generated from protobuf rpc: MakeHat(Size) returns (Hat);
+     * @generated from protobuf rpc: RunCode(RunCodeRequest) returns (RunCodeResponse);
      */
-    makeHat(input: Size, options?: RpcOptions): UnaryCall<Size, Hat>;
+    runCode(input: RunCodeRequest, options?: RpcOptions): UnaryCall<RunCodeRequest, RunCodeResponse>;
 }
 /**
- * Haberdasher service makes hats for clients.
+ * Sandbox service runs the provided code and returns the result
  *
- * @generated from protobuf service Haberdasher
+ * @generated from protobuf service Sandbox
  */
-export class HaberdasherClient implements IHaberdasherClient, ServiceInfo {
-    typeName = Haberdasher.typeName;
-    methods = Haberdasher.methods;
-    options = Haberdasher.options;
+export class SandboxClient implements ISandboxClient, ServiceInfo {
+    typeName = Sandbox.typeName;
+    methods = Sandbox.methods;
+    options = Sandbox.options;
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
      * MakeHat produces a hat of mysterious, randomly-selected color!
      *
-     * @generated from protobuf rpc: MakeHat(Size) returns (Hat);
+     * @generated from protobuf rpc: RunCode(RunCodeRequest) returns (RunCodeResponse);
      */
-    makeHat(input: Size, options?: RpcOptions): UnaryCall<Size, Hat> {
+    runCode(input: RunCodeRequest, options?: RpcOptions): UnaryCall<RunCodeRequest, RunCodeResponse> {
         const method = this.methods[0], opt = this._transport.mergeOptions(options);
-        return stackIntercept<Size, Hat>("unary", this._transport, method, opt, input);
+        return stackIntercept<RunCodeRequest, RunCodeResponse>("unary", this._transport, method, opt, input);
     }
 }

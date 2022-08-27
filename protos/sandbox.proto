@@ -4,7 +4,6 @@ option go_package = "rpc/sandbox";
 
 // Sandbox service runs the provided code and returns the result
 service Sandbox {
-  // MakeHat produces a hat of mysterious, randomly-selected color!
   rpc RunCode(RunCodeRequest) returns (RunCodeResponse);
 }
 

@@ -16,8 +16,6 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
  */
 export interface ISandboxClient {
     /**
-     * MakeHat produces a hat of mysterious, randomly-selected color!
-     *
      * @generated from protobuf rpc: RunCode(RunCodeRequest) returns (RunCodeResponse);
      */
     runCode(input: RunCodeRequest, options?: RpcOptions): UnaryCall<RunCodeRequest, RunCodeResponse>;
@@ -34,8 +32,6 @@ export class SandboxClient implements ISandboxClient, ServiceInfo {
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
-     * MakeHat produces a hat of mysterious, randomly-selected color!
-     *
      * @generated from protobuf rpc: RunCode(RunCodeRequest) returns (RunCodeResponse);
      */
     runCode(input: RunCodeRequest, options?: RpcOptions): UnaryCall<RunCodeRequest, RunCodeResponse> {
